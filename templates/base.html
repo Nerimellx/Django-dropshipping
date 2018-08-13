@@ -1,0 +1,118 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block title %}
+        <title>Dropshipping</title>
+    {% endblock %}
+    <link rel="stylesheet" href="/media/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="/media/img/favicon.ico" type="image/x-icon">
+    {% block description %}
+
+    {% endblock %}
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Dropshipping</a>
+        </div>
+        {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <li class=""><a href="{% url 'login' %}">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="/accounts/profile/"><span
+                        class="glyphicon glyphicon-user"></span> {{ user.get_username|title }}</a></li>
+                <li><a href="{% url 'auth_logout' %}"><span
+                        class="glyphicon glyphicon-log-in"></span> {% trans "Log out" %}</a></li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {% trans "Log In" %}</a></li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>
+
+
+{% block breadcrumps %}
+
+{% endblock %}
+
+
+{% block content %}
+
+{% endblock content %}
+{% block footer %}
+    </div>
+    </div>
+    <div id="footer">
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Developed by Stem SC</span>
+            </div>
+        </footer>
+    </div>
+{% endblock %}
+
+
+<script src="/media/Dashboard Template for Bootstrap_files/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="/media/Dashboard Template for Bootstrap_files/popper.min.js"></script>
+<script src="/media/Dashboard Template for Bootstrap_files/bootstrap.min.js"></script>
+<script src="/media/js/jquery-3.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<!-- Icons -->
+<script src="/media/Dashboard Template for Bootstrap_files/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script src="/media/Dashboard Template for Bootstrap_files/Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            datasets: [{
+                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+</script>
+
+
+</body>
+
+</html>
