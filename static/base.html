@@ -7,10 +7,8 @@
         <title>Dropshipping</title>
     {% endblock %}
     <link rel="stylesheet" href="/media/css/style.css">
-
-    <link href="/media/css/bootstrap.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" href="/media/img/favicon.ico" type="image/x-icon">
@@ -21,46 +19,28 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-  <a class="navbar-brand navbar-text" href="{% url 'login' %}">Dropshipping</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Dropshipping</a>
+        </div>
+        {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <li class=""><a href="{% url 'login' %}">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
 
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-                    {% if user.is_authenticated %}
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'login' %}">Home <span class="sr-only"></span></a>
-      </li>
-    </ul>
-      <i class="fa fa-user-o" aria-hidden="true"></i>
-
-    <span class="glyphicon glyphicon-user">
-
-                               <a class="text-white" href="{% url 'profile' %}">
-                                <svg xmlns="http://www.w3.org/2000/svg" color="white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                               Profile
-                               </a>
-              <a class="text-white" href="{% url 'auth_logout' %}"><svg xmlns="http://www.w3.org/2000/svg" color="white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-              Log out
-              </a>
-    </span>
-      {% else %}
-           <li class="nav-item active">
-      </li>
-    </ul>
-      <i class="fa fa-user-o" aria-hidden="true"></i>
-
-    <span class="glyphicon glyphicon-user">
-              <a class="text-white" href="{% url 'login' %}">
-                  <svg xmlns="http://www.w3.org/2000/svg" color="white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-              Log in
-              </a>
-    </span>
-      {% endif %}
-  </div>
-
+                <li><a href="/accounts/profile/"><span
+                        class="glyphicon glyphicon-user"></span> {{ user.get_username|title }}</a></li>
+                <li><a href="{% url 'auth_logout' %}"><span
+                        class="glyphicon glyphicon-log-in"></span> {% trans "Log out" %}</a></li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {% trans "Log In" %}</a></li>
+            </ul>
+        {% endif %}
+    </div>
 </nav>
 
 

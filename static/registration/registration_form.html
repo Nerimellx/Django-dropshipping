@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block title %}
+    <title>Create new account (registration) - Dropshipping</title>
+{% endblock %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block breadcrumps %}
+
+{% endblock %}
+
+
+{% block content %}
+    <style>
+        small {
+            display: none;
+        }
+
+        input {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            padding-top: 5px !important;
+        }
+    button{
+        margin-bottom: 50px !important;
+    }
+    </style>
+    <div class="container">
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" alt=""
+                 src="/media/img/logo.svg"
+                 width="132" height="132">
+            <h2>Create a New DropShipping Account</h2>
+            <p class="lead">Create your Dropshipping account right now and track your Waybills live, easily process
+                returns
+                and exchanges.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-md-offset-2">
+                <form class="needs-validation" method="post" action="" novalidate="">{% csrf_token %}
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Account data</h4>
+                    <div class="row">
+                        {% for field in form %}
+                            {{ errors }}
+                            <div class="mb-3">
+
+                                {% bootstrap_field field %}
+                            </div>
+                        {% endfor %}
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

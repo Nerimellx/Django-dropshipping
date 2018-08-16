@@ -24,18 +24,24 @@
             border: 1px solid darkgrey;
             border-radius: 8px;
             width: 1000px !important;
+            height: 100% !important;
         }
 
         .profile__descriptions h1 {
             margin-left: 30px;
-            font-size: 35px;
+            font-size: 32px;
         }
 
-        .profile__descriptions li {
-            font-size: 20px;
-            margin-top: 20px;
+        .profile__descriptions p {
+            display: inline;
+            font-size: 18px;
+            margin-top: 40px;
             margin-left: 60px;
             color: grey;
+        }
+
+        .profile__descriptions span {
+            font-size: 20px;
         }
     </style>
     <div class="container-fluid">
@@ -87,13 +93,13 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
                 <div class="profile__descriptions">
-                    <h1>Your group</h1>
-                    <ul>
-
-                        {% for gr in user.groups.all %}
-                            <li>{{ gr|title }}</li>
-                        {% endfor %}
-                    </ul>
+                    <h1>Profile</h1>
+                    <p>name :</p><span> {{ user.first_name|title }} {{ user.last_name|title }}</span><br/>
+                    <p>login :</p><span> {{ user.username|title }}</span><br/>
+                    <p>email :</p><span> {{ user.email }}</span><br/>
+                    <hr/>
+                    <p>billing address :</p><span> {{ user.address|title }}</span><br/>
+                    <p>shipping address :</p><span> {{ user.shipping_address|title }}</span><br/>
                 </div>
             </main>
         </div>

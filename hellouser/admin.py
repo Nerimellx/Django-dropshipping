@@ -5,8 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 from hellouser.models import Products,Customers,Suppliers,FreightPackingType,Waybill,WaybillProducts,WaybillFreightPacking, MyUser
 
 # Register your models here.
-admin.site.register(MyUser)
-admin.site.register(User, UserAdmin)
+admin.site.register(MyUser, UserAdmin)
 admin.site.register(Products)
 admin.site.register(Customers)
 admin.site.register(Suppliers)
