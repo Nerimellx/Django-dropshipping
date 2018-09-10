@@ -1,0 +1,7 @@
+Django==1.11.12
+django-bootstrap3==10.0.1
+django-bootstrap4==0.0.6
+django-crispy-forms==1.7.2
+django-phonenumber-field==2.0.0
+django-registration-redux==2.4
+phonenumberslite==8.9.10
