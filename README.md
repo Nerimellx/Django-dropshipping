@@ -11,3 +11,12 @@
 		 pip install -U -r requirements.txt
 	</pre>	 
 </p>
+<h2>
+	Getting started
+</h2>
+<p>
+	You need to use these command in your project folder:
+	<pre>
+		python3 manage.py runserver
+	</pre>
+</p>
