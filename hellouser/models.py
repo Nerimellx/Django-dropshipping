@@ -6,22 +6,23 @@ from django.contrib.auth.models import AbstractUser
 
 
 class MyUser(AbstractUser):
-  address = models.CharField(max_length=100, default='', blank=False, verbose_name='Адрес')
-  address_optional = models.CharField(max_length=100, default='', blank=True, verbose_name='Дополнительный Адрес')
-  country = models.CharField(max_length=100, default='', blank=False, verbose_name='Страна')
-  city = models.CharField(max_length=100, default='', blank=False, verbose_name='Город')
-  zip = models.CharField(max_length=100, default='', blank=False, verbose_name='Почтовый индекс')
-  shipping_address_optional = models.CharField(max_length=100, default='', blank=True,
-                                               verbose_name='Дополнительный Адрес отправки')
-  shipping_address = models.CharField(max_length=100, default='', blank=True,
-                                       verbose_name='Адрес отправки')
-  shipping_country = models.CharField(max_length=100, default='', blank=True, verbose_name='Страна отправки')
-  shipping_city = models.CharField(max_length=100, default='', blank=True, verbose_name='Город отправки')
-  shipping_zip = models.CharField(max_length=100, default='', blank=True, verbose_name='Почтовый индекс отправки')
+    address = models.CharField(max_length=100, default='', blank=False, verbose_name='Адрес')
+    address_optional = models.CharField(max_length=100, default='', blank=True, verbose_name='Дополнительный Адрес')
+    country = models.CharField(max_length=100, default='', blank=False, verbose_name='Страна')
+    city = models.CharField(max_length=100, default='', blank=False, verbose_name='Город')
+    zip = models.CharField(max_length=100, default='', blank=False, verbose_name='Почтовый индекс')
+    shipping_address_optional = models.CharField(max_length=100, default='', blank=True,
+                                                 verbose_name='Дополнительный Адрес отправки')
+    shipping_address = models.CharField(max_length=100, default='', blank=True,
+                                        verbose_name='Адрес отправки')
+    shipping_country = models.CharField(max_length=100, default='', blank=True, verbose_name='Страна отправки')
+    shipping_city = models.CharField(max_length=100, default='', blank=True, verbose_name='Город отправки')
+    shipping_zip = models.CharField(max_length=100, default='', blank=True, verbose_name='Почтовый индекс отправки')
 
-  class Meta:
-      verbose_name = 'Пользователь'
-      verbose_name_plural = 'Пользователи'
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
 
 default_char_field_length = 255
 
@@ -99,26 +100,28 @@ class Products(BaseModel):
         return u"{0}".format(self.name)
 
 
-class Customers(BaseModel):
-    name = models.CharField(max_length=default_char_field_length, default='', verbose_name='Название товара')
-    phone_number = PhoneNumberField(verbose_name = 'Телефон', blank = False)
+class Contractor(BaseModel):
+    name = models.CharField(max_length=default_char_field_length, default='', verbose_name='Имя')
+    phone_number = PhoneNumberField(verbose_name='Телефон', blank=False)
     address = models.CharField(verbose_name='Адрес', max_length=255, blank=False)
     lat = models.DecimalField(verbose_name='Широта', max_digits=9, decimal_places=7, blank=True, null=True, default=0)
     lon = models.DecimalField(verbose_name='Долгота', max_digits=10, decimal_places=7, blank=True, null=True, default=0)
 
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return u"{0}".format(self.name)
+
+
+class Customers(Contractor):
     class Meta:
         db_table = 'customers'
         verbose_name = 'Заказчик'
         verbose_name_plural = 'Заказчики'
 
 
-class Suppliers(BaseModel):
-    name = models.CharField(max_length=default_char_field_length, default='', verbose_name='Название товара')
-    phone_number = PhoneNumberField(verbose_name = 'Телефон', blank = False)
-    address = models.CharField(verbose_name='Адрес', max_length=255, blank=False)
-    lat = models.DecimalField(verbose_name='Широта', max_digits=9, decimal_places=7, blank=True, null=True, default=0)
-    lon = models.DecimalField(verbose_name='Долгота', max_digits=10, decimal_places=7, blank=True, null=True, default=0)
-
+class Suppliers(Contractor):
     class Meta:
         db_table = 'suppliers'
         verbose_name = 'Поставщик'
@@ -127,7 +130,7 @@ class Suppliers(BaseModel):
 
 # --------------- drop shiping --------------------
 class FreightPackingType(BaseModel):
-    name = models.CharField(max_length=default_char_field_length, default='', unique=True,verbose_name="Название")
+    name = models.CharField(max_length=default_char_field_length, default='', unique=True, verbose_name="Название")
 
     class Meta:
         verbose_name = 'Транспортная упаковка'
@@ -136,7 +139,6 @@ class FreightPackingType(BaseModel):
 
 
 class Document(BaseModel):
-
     number = models.CharField(max_length=default_char_field_length, default='', unique=True,
                               verbose_name="Номер документа")
     editable = models.BooleanField(default=True, verbose_name='Документ может редактирвоаться')
@@ -237,9 +239,9 @@ class Waybill(Document):
     receiver = models.ForeignKey('Customers', default=None, null=True,
                                  verbose_name="Получатель груза (покупатель)", on_delete=models.CASCADE)
     consignor = models.ForeignKey('Suppliers', default=None, null=True,
-                                 verbose_name="Отправитель груза (поставщик)", on_delete=models.CASCADE)
-    waybill_description = models.CharField(max_length=512, default='', blank=True, verbose_name='Описание состава отправления')
-
+                                  verbose_name="Отправитель груза (поставщик)", on_delete=models.CASCADE)
+    waybill_description = models.CharField(max_length=512, default='', blank=True,
+                                           verbose_name='Описание состава отправления')
 
     def get_weight(self):
         # Получить вес отправления
@@ -265,8 +267,8 @@ class WaybillProducts(ProductDocTable):
     """
     Табличная часть документа ТТН
     """
-    parent = models.ForeignKey('Waybill', default=None, null=True,verbose_name="Документ,"
-                                                                                    " владелец табличной части",
+    parent = models.ForeignKey('Waybill', default=None, null=True, verbose_name="Документ,"
+                                                                                " владелец табличной части",
                                on_delete=models.CASCADE)
 
     class Meta:
@@ -286,7 +288,8 @@ class WaybillFreightPacking(RowTable):
     Табличная часть документа ТТН
     """
     parent = models.ForeignKey('Waybill', default=None, null=True,
-                                 verbose_name="Документ, владелец табличной части", on_delete=models.CASCADE)
+                               verbose_name="Документ, владелец табличной части", on_delete=models.CASCADE)
+
 
     class Meta:
         db_table = 'waybill_freight_packing'
