@@ -11,10 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-try:
-    from local_settings import *
-except ImportError:
-    pass
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -46,15 +43,21 @@ INSTALLED_APPS = [
     'registration',
     'bootstrap4',
 ]
+try:
+    from dropshipping.local_settings import *
+except ImportError:
+    pass
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "Your EMAIL"
-EMAIL_HOST_PASSWORD = "Your PASSWORD"
+#EMAIL_HOST_USER = "your gmail"
+#EMAIL_HOST_PASSWORD = "your password"
 EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
