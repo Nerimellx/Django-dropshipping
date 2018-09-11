@@ -10,8 +10,8 @@ from hellouser.models import Products, Customers, Suppliers, FreightPackingType,
 
 class WayBillProductsInline(admin.TabularInline):
     model = WaybillProducts
-    fields = ('product', 'price_value', 'quantity')
-    list_display = ('product', 'price_value', 'quantity')
+    fields = ('product', 'price_value', 'quantity', 'row_number')
+    list_display = ('product', 'price_value', 'quantity', 'row_number')
     extra = 1
 
 

@@ -240,6 +240,7 @@ class Waybill(Document):
                                  verbose_name="Получатель груза (покупатель)", on_delete=models.CASCADE)
     consignor = models.ForeignKey('Suppliers', default=None, null=True,
                                   verbose_name="Отправитель груза (поставщик)", on_delete=models.CASCADE)
+
     waybill_description = models.CharField(max_length=512, default='', blank=True,
                                            verbose_name='Описание состава отправления')
 
@@ -277,7 +278,7 @@ class WaybillProducts(ProductDocTable):
         verbose_name_plural = 'Товары в ТТН'
 
     def __str__(self):
-        return u"{0}".format(self.number)
+        return u"{0}".format(self.row_number)
 
     def save(self, *args, **kwargs):
         super(WaybillProducts, self).save(*args, **kwargs)
