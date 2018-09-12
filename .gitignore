@@ -1,6 +1,8 @@
 .idea
 __pycache__
 logs/
+
+dropshipping/local_settings.py
 venv/
 
 db.sqlite3
