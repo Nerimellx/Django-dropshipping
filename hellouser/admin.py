@@ -15,15 +15,30 @@ class WayBillProductsInline(admin.TabularInline):
     extra = 1
 
 
+class WaybillFreightPackingInline(admin.TabularInline):
+    model = WaybillFreightPacking
+    fields = ('row_number', 'freight_packing', 'weight', 'width', 'height', 'length', 'barcode', 'verified',)
+    list_display = ('row_number', 'freight_packing', 'weight', 'width', 'height', 'length', 'barcode', 'verified')
+    extra = 1
+
+
 class WayBillAdmin(admin.ModelAdmin):
     list_display = ('number', 'receiver', 'consignor', 'waybill_description')
     fields = ('number', 'receiver', 'consignor', 'waybill_description')
     inlines = [
-        WayBillProductsInline
+        WayBillProductsInline,
+        WaybillFreightPackingInline
     ]
 
 
-admin.site.register(MyUser, UserAdmin)
+class MyUserAdmin(admin.ModelAdmin):
+#    fields = ('address', 'address_optional', 'country', 'city', 'zip', 'shipping_address_optional', 'shipping_address',
+#              'shipping_country', 'shipping_city', 'shipping_zip',)
+    list_display = ('username','email','first_name', 'last_name','address', )
+
+
+
+admin.site.register(MyUser, MyUserAdmin)
 admin.site.register(Products)
 admin.site.register(Customers)
 admin.site.register(Suppliers)

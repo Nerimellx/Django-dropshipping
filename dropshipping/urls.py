@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include
 from django.conf.urls import url
-from django.views.generic.base import TemplateView
 from registration.backends.default.views import RegistrationView
 from hellouser.forms import UpdatedRegistrationForm
-from hellouser.views import group
-from hellouser.views import dashboard
+from hellouser.views import GroupView
+from hellouser.views import DashboardView
+from hellouser.views import ProfileView
+
 
 
 class RegistrationViewUniqueEmail(RegistrationView):
@@ -35,11 +36,11 @@ urlpatterns = [
         name='admin'),
 
     url(r'^accounts/profile/group/',
-        group,
+        GroupView.as_view(),
         name='group'),
 
     url(r'^accounts/profile/dashboard/',
-        dashboard,
+        DashboardView.as_view(),
         name='dashboard'),
 
     url(r'^$',
@@ -56,7 +57,7 @@ urlpatterns = [
         ), name='auth_password_reset'),
 
     url(r'^accounts/profile/',
-        TemplateView.as_view(template_name='registration/profile.html'),
+        ProfileView.as_view(),
         name='profile'),
 
     url(r'^register/$', RegistrationViewUniqueEmail.as_view(),               name='registration_register'),

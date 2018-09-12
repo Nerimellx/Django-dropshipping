@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 {% block title %}
     {% if user.is_authenticated %}
-Profile - {{ user.username|title }}
+        {{ title }}
     {% else %}
         Log in
     {% endif %}
@@ -99,4 +99,17 @@ Profile - {{ user.username|title }}
         </div>
     </div>
 
+{% endblock %}
+
+{% block footer %}
+    </div>
+    </div>
+    <div id="footer">
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Developed by Stem SC</span>
+                <p style="display: inline;float: right;margin-bottom: 0px;" class=" text-muted">&copy; 2018</p>
+            </div>
+        </footer>
+    </div>
 {% endblock %}

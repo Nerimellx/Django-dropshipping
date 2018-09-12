@@ -57,9 +57,23 @@
 
                     <a href="{% url 'auth_password_reset' %}">{% trans "Forgot your password?" %}</a>
                     <a href="{% url 'registration_register' %}">{% trans "Sign up?" %}</a>
-                    <a href="/admin/login/">Admin?</a>
-                    <p class="copy mt-5 mb-3 text-muted">&copy; 2018</p>
+
+
                 </div>
                 </div>
             {% endif %}
+{% endblock %}
+
+{% block footer %}
+    </div>
+    </div>
+    <div id="footer">
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Developed by Stem SC</span>
+                <a <p style="display: inline;margin-left: 40px;"href="/admin/login/">Admin Panel</a>
+                <p style="display: inline;float: right;margin-bottom: 0px;" class=" text-muted">&copy; 2018</p>
+            </div>
+        </footer>
+    </div>
 {% endblock %}

@@ -1,15 +1,34 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-def group(request):
+class GroupView(LoginRequiredMixin, View):
     title = 'Profile group'
-    return render(request,'registration/profile_group.html', {title: 'title'})
+    template_name = 'registration/profile_group.html'
+
+    context = {
+        'title' : title
+    }
+
+    def get(self, request):
+        return render(request,self.template_name, self.context)
 
 
-def dashboard(request):
+class ProfileView(LoginRequiredMixin, View):
+    template_name = 'registration/profile.html'
+
+    def get(self, request):
+        return render(request,self.template_name)
+
+class DashboardView(LoginRequiredMixin, View):
     title = 'Profile dashboard'
-    return render(request,'registration/dashboard.html', {title: 'title'})
-# Create your views here.
+    template_name = 'registration/dashboard.html'
+
+    context = {
+        'title' : title
+    }
+
+    def get(self, request):
+        return render(request,self.template_name, self.context)

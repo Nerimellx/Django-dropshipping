@@ -1,3 +1,0 @@
-
-EMAIL_HOST_USER = "kirill12062000@gmail.com"
-EMAIL_HOST_PASSWORD = "nelin3970939"

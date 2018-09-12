@@ -137,6 +137,9 @@ class FreightPackingType(BaseModel):
         verbose_name_plural = 'Транспортные упаковки'
         db_table = 'transport_packaging'
 
+    def __str__(self):
+        return u"{0}".format(self.name)
+
 
 class Document(BaseModel):
     number = models.CharField(max_length=default_char_field_length, default='', unique=True,
@@ -215,7 +218,7 @@ class FreightPackingDocTable(RowTable):
     width = models.DecimalField(max_digits=15, decimal_places=3, default=0, blank=True, verbose_name='Ширина ТУ')
     height = models.DecimalField(max_digits=15, decimal_places=3, default=0, blank=True, verbose_name='Высота ТУ')
     length = models.DecimalField(max_digits=15, decimal_places=3, default=0, blank=True, verbose_name='Длина ТУ')
-    barcode = models.CharField(verbose_name='ШтрихКод', max_length=32)
+    barcode = models.CharField(verbose_name='ШтрихКод', max_length=32, default=0)
     verified = models.BooleanField(default=True, verbose_name='Груз проверен')
 
     def get_weight(self):
@@ -284,13 +287,12 @@ class WaybillProducts(ProductDocTable):
         super(WaybillProducts, self).save(*args, **kwargs)
 
 
-class WaybillFreightPacking(RowTable):
+class WaybillFreightPacking(FreightPackingDocTable):
     """
     Табличная часть документа ТТН
     """
     parent = models.ForeignKey('Waybill', default=None, null=True,
                                verbose_name="Документ, владелец табличной части", on_delete=models.CASCADE)
-
 
     class Meta:
         db_table = 'waybill_freight_packing'
@@ -298,7 +300,7 @@ class WaybillFreightPacking(RowTable):
         verbose_name_plural = 'Транспортные упаковки в ТТН'
 
     def __str__(self):
-        return u"{0}".format(self.number)
+        return u"{0}".format(self.row_number)
 
     def save(self, *args, **kwargs):
-        super(WaybillProducts, self).save(*args, **kwargs)
+        super(WaybillFreightPacking, self).save(*args, **kwargs)
