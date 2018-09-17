@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load i18n %}
 {% load bootstrap4 %}
 {% block title %}
@@ -73,6 +74,9 @@
                 <div class="mb-3">
                     {% bootstrap_field form.email %}
                 </div>
+                <div class="mb-3">
+                    {% bootstrap_field form.number %}
+                </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         {% bootstrap_field form.password1 %}
@@ -133,14 +137,8 @@
             </form>
         </div>
     </div>
-    <script>
-    $(document).ready(function(){
-  $("input[type=checkbox]").click(function(){
-    $(this).parents('.checkbox').next(".options").slideToggle("slow");
-    $(this).toggleClass("active");
-  });
-});
-    </script>
+
+
 {% endblock %}
 {% block footer %}
 

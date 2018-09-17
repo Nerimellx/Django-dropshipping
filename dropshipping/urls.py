@@ -1,3 +1,4 @@
+
 """dropshipping URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -23,7 +24,7 @@ from hellouser.forms import UpdatedRegistrationForm
 from hellouser.views import GroupView
 from hellouser.views import DashboardView
 from hellouser.views import ProfileView
-
+from hellouser.views import WaybillView
 
 
 class RegistrationViewUniqueEmail(RegistrationView):
@@ -31,6 +32,14 @@ class RegistrationViewUniqueEmail(RegistrationView):
 
 
 urlpatterns = [
+    url(r'^accounts/profile/waybill/search/', include('hellouser.urls')),
+
+    url(r'^accounts/profile/waybill/',
+        WaybillView.as_view(),
+        name='waybill'),
+
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
     url(r'^admin/',
         admin.site.urls,
         name='admin'),

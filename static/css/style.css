@@ -22,7 +22,7 @@ body {
     background-color: #f5f5f5;
 }
 
-span a{
+span a {
     color: white !important;
 }
 
@@ -79,32 +79,96 @@ a {
     color: black !important;
 }
 
-        #link-list {
-            color: black !important;
-            margin-top: 12px;
-        }
+#link-list {
+    color: black !important;
+    margin-top: 12px;
+}
 
-        .profile__descriptions {
-            margin-top: 30px;
-            border: 1px solid darkgrey;
-            border-radius: 8px;
-            width: 1000px !important;
-            height: 100% !important;
-        }
+.profile__descriptions {
+    margin-top: 30px;
+    border: 1px solid darkgrey;
+    border-radius: 8px;
+    width: 1000px !important;
+    height: 100% !important;
+}
 
-        .profile__descriptions h1 {
-            margin-left: 30px;
-            font-size: 32px;
-        }
+.profile__descriptions h1 {
+    margin-left: 30px;
+    font-size: 32px;
+}
 
-        .profile__descriptions p {
-            display: inline;
-            font-size: 18px;
-            margin-top: 40px;
-            margin-left: 60px;
-            color: grey;
-        }
+.profile__descriptions p {
+    display: inline;
+    font-size: 18px;
+    margin-top: 40px;
+    margin-left: 60px;
+    color: grey;
+}
 
-        .profile__descriptions span {
-            font-size: 20px;
-        }
+.profile__descriptions span {
+    font-size: 20px;
+}
+
+.table__info th:nth-child(1), .table__info th:nth-child(2) {
+    min-width: 40px;
+}
+
+.table__info th:nth-child(3), .table__info th:nth-child(4), .table__info th:nth-child(5) {
+    min-width: 140px;
+}
+
+.table__info th:nth-child(4) {
+    min-width: 300px;
+}
+
+.table__info td, .table__info th {
+    padding: 10px;
+}
+
+.card__header__background {
+    background-color: #f5c6cb;
+}
+
+.card-footer a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#link-list {
+    color: black !important;
+    margin-top: 12px;
+}
+
+.profile__descriptions {
+    margin-top: 30px;
+    border: 1px solid darkgrey;
+    border-radius: 8px;
+    width: 1000px !important;
+}
+
+.profile__descriptions h1 {
+    margin-left: 30px;
+    font-size: 35px;
+}
+
+.profile__descriptions li {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 60px;
+    color: grey;
+}
+
+.text-muted{
+    margin-bottom: 0 !important;
+}
+
+.main__menu a{
+    text-decoration: none;
+}
+
+#date_time .form-group label {
+    margin-bottom: 0;
+    color: #6c757d !important;
+}
+

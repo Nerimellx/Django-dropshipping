@@ -1,15 +1,17 @@
 {% load i18n %}
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<title>
-    {% block title %}
+    <title>
+        {% block title %}
         Dropshipping
-    {% endblock %}
-</title>
+        {% endblock %}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'lib/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
@@ -22,7 +24,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+<nav class="main__menu navbar navbar-expand-lg  navbar-dark bg-dark">
     <a class="navbar-brand navbar-text" href="{% url 'login' %}">Dropshipping</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,13 +34,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'login' %}">Home <span class="sr-only"></span></a>
-                </li>
-                </ul>
-                <i class="fa fa-user-o" aria-hidden="true"></i>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'login' %}">Home <span class="sr-only"></span></a>
+            </li>
+        </ul>
+        <i class="fa fa-user-o" aria-hidden="true"></i>
 
-                <span class="glyphicon glyphicon-user">
+        <span class="glyphicon glyphicon-user">
 
                                <a class="text-white" href="{% url 'profile' %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" color="white" width="24" height="24"
@@ -59,13 +61,13 @@
               Log out
               </a>
     </span>
-            {% else %}
-                <li class="nav-item active">
-                </li>
-                </ul>
-                <i class="fa fa-user-o" aria-hidden="true"></i>
+        {% else %}
+        <li class="nav-item active">
+        </li>
+        </ul>
+        <i class="fa fa-user-o" aria-hidden="true"></i>
 
-                <span class="glyphicon glyphicon-user">
+        <span class="glyphicon glyphicon-user">
               <a class="text-white" href="{% url 'login' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" color="white" width="24" height="24" viewBox="0 0 24 24"
                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -74,7 +76,7 @@
               Log in
               </a>
     </span>
-            {% endif %}
+        {% endif %}
     </div>
 
 </nav>
@@ -89,16 +91,16 @@
 
 {% endblock content %}
 {% block footer %}
-    </div>
-    </div>
-    <div id="footer">
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">Developed by Stem SC</span>
-                <p style="display: inline;float: right;" class="mb-3 text-muted">&copy; 2018</p>
-            </div>
-        </footer>
-    </div>
+</div>
+</div>
+<div id="footer">
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Developed by Stem SC</span>
+            <p style="display: inline;float: right;" class="text-muted">&copy; 2018</p>
+        </div>
+    </footer>
+</div>
 {% endblock %}
 
 <script src="{% static 'lib/node_modules/jquery/dist/jquery.min.js' %}"></script>
@@ -106,6 +108,23 @@
 <script src="{% static 'js/dashboard/popper.min.js' %}"></script>
 <script src="{% static 'js/dashboard/feather.min.js' %}"></script>
 <script src="{% static 'js/dashboard/Chart.min.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/inputmask.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/inputmask.extensions.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/inputmask.numeric.extensions.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/inputmask.date.extensions.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/inputmask.phone.extensions.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/jquery.inputmask.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/phone-codes/phone.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/phone-codes/phone-be.js' %}"></script>
+<script src="{% static 'js/dist/inputmask/phone-codes/phone-ru.js' %}"></script>
+
+<script>
+    $('#id_number').inputmask("phone", {
+        onKeyValidation: function () { //show some metadata in the console
+            console.log($(this).inputmask("getmetadata")["city"]);
+        }
+    });
+</script>
 {% block dashboard %}
 
 {% endblock %}

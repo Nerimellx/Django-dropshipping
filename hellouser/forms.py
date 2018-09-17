@@ -1,11 +1,15 @@
 from registration.forms import RegistrationFormUniqueEmail
-from django.forms.fields import CharField
+from django.forms.fields import CharField,IntegerField
 from hellouser.models import MyUser
+from django.contrib.admin.widgets import AdminDateWidget
+from django import forms
+from django.forms import extras
 
 
 class UpdatedRegistrationForm(RegistrationFormUniqueEmail):
     first_name = CharField(max_length=20)
     last_name = CharField(max_length=30)
+    number = CharField(max_length=30)
     address = CharField(max_length=30)
     address_optional = CharField(max_length=30, required=False)
     country = CharField(max_length=30)
@@ -26,6 +30,7 @@ class UpdatedRegistrationForm(RegistrationFormUniqueEmail):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.address = self.cleaned_data['address']
+        user.number = self.cleaned_data['number']
         user.address_optional = self.cleaned_data['address_optional']
         user.country = self.cleaned_data['country']
         user.city = self.cleaned_data['city']
@@ -38,3 +43,8 @@ class UpdatedRegistrationForm(RegistrationFormUniqueEmail):
         if commit:
             user.save()
             return user
+
+
+class SearchFilterForm(forms.Form):
+
+    updated = forms.DateField(widget=extras.SelectDateWidget(years=range(2015, 2019)))

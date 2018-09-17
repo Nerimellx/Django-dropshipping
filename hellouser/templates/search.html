@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block title %}
+Waybill
+{% endblock %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block breadcrumps %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <nav style="height: 100%" class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="link-list" href="{% url 'dashboard' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="link-list" href="{% url 'profile' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Profile
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="link-list" href="{% url 'group' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-file">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            Your group
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="link-list" href="{% url 'waybill' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-file">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            Waybill
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Documents</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card__header__background card-header">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <button class="btn btn-outline-secondary btn-sm btn-block">New</button>
+
+                                            </div>
+                                            <div class="col-md-5">
+                                                <button class="btn btn-outline-secondary btn-sm btn-block"
+                                                        data-toggle="modal" data-target="#exampleModal">Filter
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div style="overflow-x: scroll" class="">
+                                    <table class="table__info table table-striped table-sm table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">S</th>
+                                            <th scope="col">E</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Create</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for waybills in contacts%}
+                                        <tr class="table-success">
+                                            <td scope="row">{{ waybills.status }}</td>
+                                            <td>{{ waybills.block }}</td>
+                                            <td>{{ waybills.number }}</td>
+                                            <td>{{ waybills.date_doc }}</td>
+                                            <td>{{ waybills.created_by }}</td>
+                                            <td nowrap>{{ waybills.desc }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{% url 'hellouser:index' %}" method="get">
+                                            <div class="form-group modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="mb-3 row">
+                                                        <div class="col-md-6">
+                                                            <label for="number" class="text-muted">
+                                                                Number
+                                                                <input placeholder="Search" class="form-control"
+                                                                       id="number"
+                                                                       name="number" type="search">
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6" id="date_time">
+                                                            {% bootstrap_field form.updated %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <div class="col-md-6">
+                                                            <label style="display: block" class="text-muted">Status
+                                                                :</label>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="status" id="inlineRadio1"
+                                                                       value="MD">
+                                                                <label class="form-check-label" for="inlineRadio1">Deleted</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="status" id="inlineRadio2"
+                                                                       value="PR">
+                                                                <label class="form-check-label" for="inlineRadio2">Processed</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="status" id="inlineRadio3"
+                                                                       value="SV">
+                                                                <label class="form-check-label"
+                                                                       for="inlineRadio3">Saved</label>
+                                                            </div>
+                                                            <div style="margin-left: 12px;margin-right:0;"
+                                                                 class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="status" id="inlineRadio4"
+                                                                       value="" checked>
+                                                                <label class="form-check-label" for="inlineRadio4">All
+                                                                    statuses</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label style="display: block" class="text-muted">Editable
+                                                                :</label>
+                                                            <div style="margin-right: 0"
+                                                                 class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="editable" id="Radio1"
+                                                                       value="NBD">
+                                                                <label class="form-check-label" for="inlineRadio1">Nobody</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="editable" id="Radio2"
+                                                                       value="ADM">
+                                                                <label class="form-check-label" for="inlineRadio2">Only
+                                                                    admin</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="editable" id="Radio3"
+                                                                       value="ALL">
+                                                                <label class="form-check-label"
+                                                                       for="inlineRadio3">For all</label>
+                                                            </div>
+                                                            <div style="margin-left: 0px"
+                                                                 class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="editable" id="Radio4"
+                                                                       value="" checked>
+                                                                <label class="form-check-label" for="inlineRadio4">All
+                                                                    statuses</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="text-muted" for="created-select">Created :
+                                                                <select name="created" id="created-select" class="custom-select">
+                                                                    <option value="admin" selected>Admin</option>
+                                                                    <option value="receiver">Receiver</option>
+                                                                    <option value="consignor">Consignor</option>
+                                                                    <option value="user">User</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+
+                                                            <label class="text-muted" for="upload-select">Updated :
+                                                                <select name="updated" id="upload-select" class="custom-select">
+                                                                    <option selected>All</option>
+                                                                    <option value="Receiver">Nobody</option>
+                                                                    <option value="Receiver">Consignor</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label for="description" class="text-muted">
+                                                                Description contains :
+                                                            </label>
+                                                            <input width="100%" placeholder="Search"
+                                                                   class="form-control"
+                                                                   id="description"
+                                                                   name="description" type="search">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Clear
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Filter</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- End Modal -->
+
+                            <div class="card-footer">
+                                <div style="" class="col-md-12 text-center">
+                                    <!--<a href="?page=1">-->
+                                    <!--<span style="">1</span>-->
+                                    <!--</a>-->
+                                    {% if contacts.has_previous %}
+                                    <a href="?page={{ contacts.previous_page_number }}{{ question }}">
+                                        <span style="" aria-hidden="true">&laquo;</span>
+                                    </a>
+                                    {% endif %}
+
+                                    {% if contacts.paginator.num_pages > 1 %}
+                                    <a href=""><span style="">{{ contacts.number }}</span></a>
+                                    {% endif %}
+                                    {% if contacts.has_next %}
+                                    <a href="?page={{ contacts.next_page_number}}{{ question }}">
+                                        <span style="" aria-hidden="true">&raquo;</span>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+{% endblock %}

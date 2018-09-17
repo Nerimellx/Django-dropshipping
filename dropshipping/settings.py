@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'registration',
     'bootstrap4',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 try:
     from dropshipping.local_settings import *
@@ -145,3 +147,50 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Bold', 'Italic', 'Underline', 'TextColor', 'BGColor', 'Subscript', 'Superscript',
+             'Strike', 'Format', 'Font', 'FontSize', 'Styles'],
+            [
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Outdent', 'Indent',
+                'Link', 'Unlink', 'Anchor', 'Table', 'Image', 'NumberedList', 'BulletedList',
+                'HorizontalRule', 'Blockquote', 'Flash', 'Smiley', 'SpecialChar'],
+            [
+                'Source', 'Maximize', 'Preview', 'Scayt', 'RemoveFormat', 'Undo', 'Redo', 'Spoiler'
+            ]
+        ],
+        'height': 300,
+        'width': 1105,
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': True,
+        'contentsCss': [
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
+        ],
+        'extraPlugins': ','.join([
+            'uploadimage',  # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'image2'
+            # 'spoiler',
+        ]),
+        'baseHref': 'dev-api.stemsc.com',
+        'linkShowAdvancedTab': False,
+        'linkShowTargetTab': False,
+    }
+}
