@@ -1,5 +1,5 @@
 from registration.forms import RegistrationFormUniqueEmail
-from django.forms.fields import CharField,IntegerField
+from django.forms.fields import CharField, IntegerField
 from hellouser.models import MyUser
 from django.contrib.admin.widgets import AdminDateWidget
 from django import forms
@@ -17,7 +17,7 @@ class UpdatedRegistrationForm(RegistrationFormUniqueEmail):
     zip = CharField(max_length=30)
     shipping_address = CharField(max_length=30, required=False)
     shipping_address_optional = CharField(max_length=30, required=False)
-    shipping_country = CharField(max_length=30,required=False)
+    shipping_country = CharField(max_length=30, required=False)
     shipping_city = CharField(max_length=30, required=False)
     shipping_zip = CharField(max_length=30, required=False)
 
@@ -46,5 +46,5 @@ class UpdatedRegistrationForm(RegistrationFormUniqueEmail):
 
 
 class SearchFilterForm(forms.Form):
-
-    updated = forms.DateField(widget=extras.SelectDateWidget(years=range(2015, 2019)))
+    from_date = forms.DateField(required=False, widget=AdminDateWidget)
+    to_date = forms.DateField(required=False, widget=AdminDateWidget)

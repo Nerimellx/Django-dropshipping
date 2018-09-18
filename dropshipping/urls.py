@@ -27,11 +27,18 @@ from hellouser.views import ProfileView
 from hellouser.views import WaybillView
 
 
+def i18n_javascript(request):
+    return admin.site.i18n_javascript(request)
+
+
 class RegistrationViewUniqueEmail(RegistrationView):
     form_class = UpdatedRegistrationForm
 
 
 urlpatterns = [
+
+    url(r'^admin/jsi18n', i18n_javascript),
+
     url(r'^accounts/profile/waybill/search/', include('hellouser.urls')),
 
     url(r'^accounts/profile/waybill/',

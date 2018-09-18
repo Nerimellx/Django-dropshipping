@@ -2,6 +2,10 @@
     margin-bottom: 0px !important;
 }
 
+.sidebar .nav-link.active {
+    color: #007bff;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -22,16 +26,21 @@ body {
     background-color: #f5f5f5;
 }
 
-span a {
-    color: white !important;
+a:link, a:visited {
+    color: #447e9b;
+    text-decoration: none;
 }
 
 #submit-btn {
     margin-bottom: 20px;
 }
 
-a #link-list {
-    color: black !important;
+li .link-list{
+    font-weight: 500;
+    color: #333;
+    font-size: 20px;
+    line-height: 30px;
+    margin-top: 2px;
 }
 
 /* Custom page CSS
@@ -75,14 +84,6 @@ a {
     margin-top: 40px;
 }
 
-#link-list {
-    color: black !important;
-}
-
-#link-list {
-    color: black !important;
-    margin-top: 12px;
-}
 
 .profile__descriptions {
     margin-top: 30px;
@@ -125,19 +126,10 @@ a {
     padding: 10px;
 }
 
-.card__header__background {
-    background-color: #f5c6cb;
-}
-
 .card-footer a {
     color: #6c757d;
     text-decoration: none;
     font-size: 20px;
-}
-
-#link-list {
-    color: black !important;
-    margin-top: 12px;
 }
 
 .profile__descriptions {
@@ -170,5 +162,15 @@ a {
 #date_time .form-group label {
     margin-bottom: 0;
     color: #6c757d !important;
+}
+
+.calendarbox {
+    z-index: 1060;
+    width: 260px !important;
+}
+
+.calendarbox .calendarnav-previous, .calendarbox .calendarnav-next {
+    bottom: 66px;
+    top: auto;
 }
 

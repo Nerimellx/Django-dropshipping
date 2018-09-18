@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
-
+{{ form.media }}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +15,9 @@
 
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'lib/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     {% block description %}
 
     {% endblock %}
@@ -48,7 +49,7 @@
                                      stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path
                                         d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7"
                                                                                                      r="4"></circle></svg>
-                               Profile
+                               {{ user.username }}
                                </a>
               <a class="text-white" href="{% url 'auth_logout' %}"><svg xmlns="http://www.w3.org/2000/svg" color="white"
                                                                         width="24" height="24" viewBox="0 0 24 24"
@@ -117,7 +118,12 @@
 <script src="{% static 'js/dist/inputmask/phone-codes/phone.js' %}"></script>
 <script src="{% static 'js/dist/inputmask/phone-codes/phone-be.js' %}"></script>
 <script src="{% static 'js/dist/inputmask/phone-codes/phone-ru.js' %}"></script>
-
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/calendar.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
 <script>
     $('#id_number').inputmask("phone", {
         onKeyValidation: function () { //show some metadata in the console

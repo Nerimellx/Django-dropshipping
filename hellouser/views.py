@@ -7,7 +7,7 @@ from .models import *
 from django.shortcuts import render
 from .forms import SearchFilterForm
 from django.db.models import Q
-from django.db import connection
+import datetime
 
 
 class GroupView(LoginRequiredMixin, View):
@@ -73,12 +73,14 @@ class DashboardView(LoginRequiredMixin, View):
 
 
 class ESearchView(LoginRequiredMixin, View):
-    template_name = 'search.html'
+    template_name = 'Documents.html'
 
     title = 'Search'
 
     def get(self, request, *args, **kwargs):
-        number = request.GET.get('number')
+        number = request.GET.get('number', None)
+        from_date = request.GET.get('from_date')
+        to_date = request.GET.get('to_date')
         status = request.GET.get('status')
         editable = request.GET.get('editable')
         created = request.GET.get('created')
@@ -87,18 +89,46 @@ class ESearchView(LoginRequiredMixin, View):
 
         form = SearchFilterForm()
 
-        question = u"&number={0}&status={1}&editable={2}&created={3}&uploaded={4}&description={5}".format(number,
-                                                                                                          status,
-                                                                                                          editable,
-                                                                                                          created,
-                                                                                                          updated,
-                                                                                                          description, )
+        if not from_date:
+            from_date = datetime.date(1900, 1, 1)
 
-        waybill = WayBillDoc.objects.filter(Q(status=status), Q(block=editable),
-                                            Q(created_by=created), Q(number__startswith=number),
-                                            Q(desc__startswith=description))
+        if not to_date:
+            to_date = datetime.date(2600, 1, 1)
 
-        paginator = Paginator(waybill, 7)
+        query_list = [Q(updated__range=(from_date, to_date))]
+
+        if number:
+            query_list.append(Q(number__contains=number))
+
+        if status:
+            query_list.append(Q(status__startswith=status))
+
+        if editable:
+            query_list.append(Q(block__startswith=editable))
+
+        if created:
+            query_list.append(Q(created_by__startswith=created))
+
+        if updated:
+            query_list.append(Q(source__startswith=updated))
+
+        if description:
+            query_list.append(Q(desc__startswith=description))
+
+        question = u"&number={0}&from_date={1}&to_date={2}&status={3}" \
+                   u"&editable={4}&created={5}&updated={6}&description={7}".format(
+            number,
+            from_date,
+            to_date,
+            status,
+            editable,
+            created,
+            updated,
+            description, )
+
+        waybill = WayBillDoc.objects.filter(*query_list)
+
+        paginator = Paginator(waybill, 2)
 
         page = request.GET.get('page')
         try:

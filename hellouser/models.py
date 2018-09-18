@@ -804,7 +804,8 @@ class WayBillDoc(Document):
 
     @classmethod
     def form_edit_fields(cls):
-        return 'number', 'date_doc', 'created_by', 'status', 'block', 'consignor', 'receiver', 'order', 'check_product','desc'
+        return 'number', 'date_doc', 'created_by', 'status', 'block', 'consignor', 'receiver', 'order', 'check_product',\
+               'desc', 'source'
 
     @classmethod
     def table_fields(cls, *args, **kwargs):
@@ -1243,5 +1244,3 @@ class Config(BaseModel):
         db_table = 'config'
         verbose_name = _('Конфигурация')
         verbose_name_plural = _('Конфигурации')
-
-
